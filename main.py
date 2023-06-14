@@ -4,15 +4,17 @@ file = 'operations.json'
 
 file_json = functions.json_file(file)
 
-
+# Задаем переменную для создания списка выполненый операций
 executed = "EXECUTED"
 
 executed_list = functions.sort_data(executed, file_json)
 
 sorted_list = functions.sort_by_date(executed_list)
 
+# Выводим последнии 5 операции
 five_latest_operations = sorted_list[:5]
 
+# Перебираем данные по ключам
 for transaction in five_latest_operations:
     date = transaction.get("date")
     description = transaction.get("description")
@@ -22,7 +24,7 @@ for transaction in five_latest_operations:
     currency = transaction.get("operationAmount").get("currency").get("name")
 
     date = functions.convert_date(date)
-
+# Проверка отправителя средств
     if not from_data:
         name_from = ""
         hidden_from_number = 'отправитель не указан'
